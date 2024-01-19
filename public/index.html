@@ -35,7 +35,7 @@
             }
             .row{
                 display: flex;
-                width: 600px;
+                width: 100%;
                 align-items: center;
                 gap:10px;
             }
@@ -68,9 +68,6 @@
                 align-items: center;
                 gap:10px;
             }
-            .sub{
-                float:right;
-            }
             select:hover{
                 cursor: pointer;
             }
@@ -81,48 +78,90 @@
                 font-size:xx-large;
                 cursor: pointer;
              }
+             input[type='file'] {
+                width: 100%;
+                padding: 10px;
+                border: 2px solid #ccc;
+                border-radius: 5px;
+                background-color: #f8f8f8;
+                color: #333;
+                font-size: 14px;
+                margin-bottom: 10px;
+            }
+            input[type='file'] + button {
+                padding: 10px 15px;
+                border-radius: 5px;
+                background-color: black;
+                color: white;
+                cursor: pointer;
+                border: none;
+            }
+            #listen{
+                width: 100%;
+                justify-content: center;
+            }
             @media screen and (max-width:600px) {
                 *{
                 padding: 3px;
                 box-sizing: border-box;
-            }
+                }
                 .text{
                 width: 95%;
-            }
+                }
                 textarea{
                 width: 95%;
                 height: 130px;
                 font-size: 15px;
                 border: 0px;
                 border-radius: 10px;
-            }
-            .row{
-                width:95%;
-                align-items: center;
-                gap:10px;
-            }
-            button{
-                font-size: 15px;
-                padding: 10px 30px;
-                border-radius: 20px;
-                cursor: pointer;
-                background-color: black;
-                display: flex;
-                align-items: center;
-                color:white;
-            }
-            select{
-                width: 95%;
-                border-radius: 15px;
-            }
-            .main{
-                width:95%;
-            }
-            .text1{
-                width: 95%;
-                display: flex;
-                align-items: center;
-            }
+                }
+                .row{
+                    width:100%;
+                    align-items: center;
+                    gap:10px;
+                    top: unset;
+                }
+                button{
+                    font-size: 15px;
+                    padding: 10px 30px;
+                    border-radius: 20px;
+                    cursor: pointer;
+                    background-color: black;
+                    display: flex;
+                    align-items: center;
+                    color:white;
+                }
+                select{
+                    width: 95%;
+                    border-radius: 15px;
+                }
+                .main{
+                    width:95%;
+                }
+                .sub{
+                    float: left;
+                }
+                .text1{
+                    width: 95%;
+                    display: flex;
+                    align-items: center;
+                    float: left;
+                    flex-direction: column;
+                    text-align: center;
+                }
+                h1{
+                    text-align: center;
+                    top: unset;
+                }
+                #bt,#btnUpload{
+                    width: 100%;
+                    justify-content: center;
+                    gap: 10px;
+                }
+             input[type='file'] {
+                width: calc(100% - 20px);
+                }
+                
             }
         </style>
     </head>
@@ -153,8 +192,8 @@
                 <select id="sel2">
                     <option value="en-us">English</option>`
                 </select>
-                <button id="listen">Listen</button>
             </div>
+            <button id="listen">Listen</button>
         </div>
     </div>
     <script src="lang.js"></script>

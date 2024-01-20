@@ -253,7 +253,7 @@ resultText.value = extractedText;
         fetch(apiUrl).then(res => res.json()).then(data=>{
             console.log(data.responseData.translatedText);
             document.querySelector("textarea").innerHTML=data.responseData.translatedText;
-        utterance=new SpeechSynthesisUtterance(document.querySelector("textarea").value);
+        utterance=new SpeechSynthesisUtterance(data.responseData.translatedText);
         utterance.lang=selectTag[1].value;
         speechSynthesis.speak(utterance);
         });

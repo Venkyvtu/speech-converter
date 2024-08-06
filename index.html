@@ -1,0 +1,452 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Text to Speech Converter</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <style>
+            *{
+                padding: 5px;
+                box-sizing: border-box;
+            }
+            body{
+                background:linear-gradient(45deg,red,blue);
+            }
+            body h1{
+                text-align: center;
+            }
+            .main{
+                display: flex;
+                justify-content: center;
+                
+                height: 100vh;
+            }
+            i{
+                font-size: xx-large;
+                cursor: pointer;
+            }
+            .text{
+                width: 600px;
+                text-align: center;
+            }
+            span{
+                color: brown;
+                text-decoration:underline;
+                padding-bottom: 5px;
+            }
+            textarea{
+                width: 100%;
+                height: 250px;
+                font-size: 15px;
+                border: 0px;
+                border-radius: 10px;
+                box-shadow: 10px 10px black;
+                animation: disco-border 5s infinite;
+            }
+            .row{
+                display: flex;
+                width: 100%;
+                align-items: center;
+                gap:10px;
+            }
+            button{
+                font-size: 15px;
+                padding: 10px 30px;
+                border-radius: 20px;
+                cursor: pointer;
+                background-color: black;
+                display: flex;
+                align-items: center;
+                color:white;
+            }
+            button img{
+                width: 19px;
+            }
+            select{
+                width: 100%;
+                padding: 10px 30px;
+                border-radius: 15px;
+            }
+            #sel{
+                width: 100%;
+                padding: 10px 30px;
+                border-radius: 15px;
+            }
+            .text1{
+                    margin: 0;
+                    padding: 0;
+                    display: none;
+                    height: 100%;
+                    width: 250px;
+                    z-index: 1;
+                    top: 0;
+                    left: 0;
+                    background-color: #111;
+                    overflow-x: hidden;
+                    padding-top: 60px;
+                    position: fixed;
+                    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 #00000030;
+                }
+               .text1 .closebtn {
+                position: absolute;
+                top: 0;
+                right: 25px;
+                font-size: 36px;
+                margin-left: 50px;
+                color: white;
+                text-decoration: none;
+                }
+
+            .text1 label{
+                    display: block;
+                    background-color: black;
+                    color: white;
+                    padding: 16px;
+                    text-decoration: none;
+            }
+            .text1 label:hover:not(.active){
+                background-color: #555;
+                color: white;
+            }
+            select:hover{
+                cursor: pointer;
+            }
+            #arrow {
+                content: "\21C4";
+                color: blue;
+                text-decoration: none;
+                font-size:xx-large;
+                cursor: pointer;
+             }
+             input[type='file'] {
+                width: 100%;
+                padding: 10px;
+                border: 2px solid #ccc;
+                border-radius: 5px;
+                background-color: #f8f8f8;
+                color: #333;
+                font-size: 14px;
+                margin-bottom: 10px;
+            }
+            input[type='file'] + button {
+                padding: 10px 15px;
+                border-radius: 5px;
+                background-color: black;
+                color: white;
+                cursor: pointer;
+                border: none;
+            }
+            #listen{
+                width: 90%;
+                justify-content: center;
+                float: left;
+                box-shadow: 0 4px 8px 0 rgba(85, 4, 4, 0.2), 0 6px 20px 0 #00000030;
+
+            }
+            .fa{
+                float: right;
+                cursor: pointer;
+            }
+            #listen:hover{
+                animation: disco-border 5s infinite;
+                
+            }
+            .subs{
+                margin: 0;
+                    padding: 0;
+                    display: none;
+                    height: auto;
+                    width: 300px;
+                    overflow-x: hidden;
+                    padding-top: 60px;
+                    z-index: 1;
+                    top: 0;
+                    left: 15;
+                    position: fixed;
+                    background-color: #111;
+                    
+                    box-shadow: 0 4px 8px 0 rgba(85, 4, 4, 0.2), 0 6px 20px 0 #00000030;
+            }
+            .subs .closebtn1 {
+                position: absolute;
+                top: 0;
+                right: 25px;
+                font-size: 36px;
+                margin-left: 50px;
+                color: white;
+                text-decoration: none;
+                }
+                @keyframes disco-border {
+            0% { border-color: red; }
+            10% { border-color: orange; }
+            20% { border-color: yellow; }
+            30% { border-color: green; }
+            40% { border-color: blue; }
+            50% { border-color: indigo; }
+            60% { border-color: violet; }
+            70% { border-color: purple; }
+            80% { border-color: pink; }
+            90% { border-color: magenta; }
+            100% { border-color: red; }
+        }
+        #bt:hover,#btnUpload:hover{
+            animation: disco-border 5s infinite;
+        }
+        
+            @media screen and (max-width:600px) {
+                *{
+                padding: 3px;
+                box-sizing: border-box;
+                }
+                .text{
+                width: 95%;
+                }
+                textarea{
+                width: 95%;
+                height: 300px;
+                font-size: 15px;
+                border: 0px;
+                border-radius: 10px;
+                box-shadow: 10px 10px 5px 5px;
+                }
+                .row{
+                    width:100%;
+                    align-items: center;
+                    gap:10px;
+                    top: unset;
+                }
+                button{
+                    font-size: 15px;
+                    padding: 10px 30px;
+                    border-radius: 20px;
+                    cursor: pointer;
+                    background-color: black;
+                    display: flex;
+                    align-items: center;
+                    color:white;
+                }
+                select{
+                    width: 95%;
+                    border-radius: 15px;
+                }
+                .main{
+                    width:95%;
+                    
+                }
+                .sub{
+                    float: left;
+                }
+                .text1{
+                    margin: 0;
+                    padding: 0;
+                    display: none;
+                    height: 100%;
+                    width: 250px;
+                    z-index: 1;
+                    top: 0;
+                    left: 0;
+                    background-color: #111;
+                    overflow-x: hidden;
+                    padding-top: 60px;
+                    position: fixed;
+                    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 #00000030;
+                }
+               .text1 .closebtn {
+                position: absolute;
+                top: 0;
+                right: 25px;
+                font-size: 36px;
+                margin-left: 50px;
+                color: white;
+                text-decoration: none;
+                }
+                h1{
+                    text-align: center;
+                    top: unset;
+                }
+                #bt,#btnUpload{
+                    width: 100%;
+                    justify-content: center;
+                    gap: 10px;
+                }
+             input[type='file'] {
+                width: calc(100% - 20px);
+                }
+                
+            }
+        </style>
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    </head>
+<body>
+    
+    <i class='bx bx-menu' id="ids"></i>
+    <br>
+    <div class="text1" hidden>
+        <a href="#" class="closebtn">&times;</a>
+        <label id="img">IMAGE FILE</label>
+        <label id="pdf">PDF FILE</label>
+    </div>
+    <h1>Text to Speech  <span>Converter</span></h1>
+    
+    <div class="main">
+        <div class="subs"hidden>
+            <a href="#" class="closebtn1">&times;</a>
+            <form id="uploadForm" action="/upload" method="post" enctype="multipart/form-data" >
+                <b>IMAGE FILE</b><input type="file" name="image" accept="image/*" onchange="previewImage(event)" required>
+                <img id="output" src="#" alt="Preview" height="300px" width="300px">
+                <button type="submit" id="bt">Convert</button>
+            </form>
+            <div class="sub">
+                <b>PDF FILE</b><input type="file" name="pdf" id="inpFile">
+                <button  id="btnUpload">upload</button>
+            </div>
+        </div>
+        <div class="text">
+            <div>
+                <textarea placeholder="write the text" id="resultText"></textarea>
+            </div>
+            <div class="row">
+                <select id="sel">
+                    <option value="en-us">English</option>`
+                </select>
+                <span id="arrow">&#8644;</span>
+                <select id="sel2">
+                    <option value="en-us">English</option>`
+                </select>
+            </div>
+            <button id="listen">Listen</button>
+            <i style="font-size:30px" class="fa" id="speech">&#xf130;</i>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function(){
+        $("#ids").click(function(){
+            $(".text1").toggle();
+        });
+        });
+        $(document).ready(function(){
+        $("#img").click(function(){
+            $(".subs").toggle();
+            $("#uploadForm").show();
+            $(".text1").hide();
+            $(".sub").hide();
+        });
+        });
+        $(document).ready(function(){
+        $("#pdf").click(function(){
+            $(".subs").toggle();
+            $(".sub").show();
+            $("#uploadForm").hide();
+            $(".text1").toggle();
+        });
+        });
+        $(document).ready(function(){
+        $(".closebtn").click(function(){
+            $(".text1").hide();
+        });
+        });
+        $(document).ready(function(){
+        $(".closebtn1").click(function(){
+            $(".subs").hide();
+        });
+        });
+        $(document).ready(function(){
+        $("#bt").click(function(){
+            $(".subs").hide();
+        });
+        });
+        $(document).ready(function(){
+        $("#btnUpload").click(function(){
+            $(".subs").hide();
+        });
+        });
+
+    </script>
+    <script src="lang.js"></script>
+    <script> 
+const inpFile = document.getElementById("inpFile");
+const btnUpload = document.getElementById("btnUpload");
+const resultText = document.getElementById("resultText");
+const listen= document.getElementById("listen");
+const speech= document.getElementById("speech");
+btnUpload.addEventListener("click", () => {
+const formData = new FormData();
+formData.append("pdfFile", inpFile.files[0]);
+fetch("/extract-text", {
+method: "post",
+body: formData}).then(response => {
+return response.text();
+}).then(extractedText => {
+resultText.value = extractedText;
+});
+});
+    document.getElementById('uploadForm').addEventListener('submit', function (event) {
+            event.preventDefault();
+            var formData = new FormData(this);
+            fetch('/upload', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(text => {
+                document.getElementById('resultText').innerText = text;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        });
+        let utterance;
+        const swap=document.getElementById('arrow');
+        translateFrom=selectTag[0].value;
+        translateTo=selectTag[1].value;
+        swap.addEventListener("click",()=>{
+            const val=selectTag[0].value;
+            selectTag[0].value=selectTag[1].value;
+            selectTag[1].value=val;
+        });
+        let sr = window.webkitSpeechRecognition || window.SpeechRecognition;
+        let spRec = new sr();
+        spRec.lang = "te";
+        spRec.continuous = true;
+        spRec.interimResults = true;
+
+        speech.addEventListener("click", e => {
+            e.preventDefault();
+            spRec.start();
+        })
+        spRec.onresult = res => {
+            let text = Array.from(res.results)
+                .map(r => r[0])
+                .map(txt => txt.transcript)
+                .join("");
+            resultText.value = text;
+        }
+        speech.addEventListener("dblclick", () => {
+            spRec.stop()
+        })
+    listen.addEventListener("click",()=>{
+        let text=document.querySelector("textarea").value;
+        translateFrom=selectTag[0].value;
+        translateTo=selectTag[1].value;
+        let apiUrl =`https://api.mymemory.translated.net/get?q=${text}&langpair=${translateFrom}|${translateTo}`;
+        fetch(apiUrl).then(res => res.json()).then(data=>{
+            console.log(data.responseData.translatedText);
+            document.querySelector("textarea").innerHTML=data.responseData.translatedText;
+        utterance=new SpeechSynthesisUtterance(data.responseData.translatedText);
+        utterance.lang=selectTag[1].value;
+        speechSynthesis.speak(utterance);
+        });
+    });
+    function previewImage(event) {
+            var reader = new FileReader();
+            reader.onload = function() {
+                var output = document.getElementById('output');
+                output.src = reader.result;
+            }
+            reader.readAsDataURL(event.target.files[0]);
+        };
+    </script>
+</body>
+</html>
